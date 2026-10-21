@@ -1,0 +1,9 @@
+{
+  "desc": "嘴替小程序，不对外索引",
+  "rules": [
+    {
+      "action": "disallow",
+      "page": "*"
+    }
+  ]
+}

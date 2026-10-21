@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  serverExternalPackages: ["@prisma/client", "pdf-parse", "mammoth"],
   turbopack: {
     rules: {
       "*.css": {

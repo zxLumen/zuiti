@@ -1,0 +1,114 @@
+<view class="page">
+  <view class="chat-head" wx:if="{{!loading && !error}}">
+    <view class="head-title">{{title}}</view>
+    <view class="head-row">
+      <view class="avatar">{{ownerInitial}}</view>
+      <view class="head-main">
+        <view class="head-name">{{ownerName}}</view>
+        <view class="head-sub" wx:if="{{subtitle}}">{{subtitle}}</view>
+      </view>
+      <view class="online">
+        <view class="online-dot"></view>
+        在线
+      </view>
+    </view>
+  </view>
+
+  <scroll-view
+    class="messages"
+    scroll-y
+    scroll-into-view="{{scrollInto}}"
+    scroll-with-animation
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view wx:if="{{loading}}" class="loading">
+      <view class="loading-mark">替</view>
+      <view class="loading-text">正在进入这一团…</view>
+    </view>
+
+    <view wx:elif="{{error && !messages.length}}" class="empty">
+      <view class="empty-mark">!</view>
+      <view class="empty-title">打不开这个嘴替</view>
+      <view class="empty-desc">{{error}}</view>
+      <button wx:if="{{noCapsule}}" class="retry" bindtap="openOwner">我是主人</button>
+      <button wx:else class="retry" bindtap="retry">重试</button>
+    </view>
+
+    <view wx:elif="{{!messages.length}}" class="empty">
+      <view class="empty-mark">替</view>
+      <view class="empty-title">{{emptyTitle}}</view>
+      <view class="empty-desc">{{emptyDesc}}</view>
+
+      <view class="suggestions" wx:if="{{suggestions.length}}">
+        <view
+          class="suggestion"
+          wx:for="{{suggestions}}"
+          wx:key="*this"
+          data-q="{{item}}"
+          bindtap="onSuggestion"
+        >
+          {{item}}
+        </view>
+      </view>
+
+      <view class="empty-foot">{{persona ? '仅双方可见' : '由嘴替生成'}}</view>
+    </view>
+
+    <view wx:else class="msg-list">
+      <block wx:for="{{messages}}" wx:key="id">
+        <view id="msg-{{item.id}}" class="msg-row {{item.role === 'visitor' ? 'right' : 'left'}}">
+          <view wx:if="{{!persona && item.role !== 'visitor'}}" class="role">
+            {{item.role === 'owner' ? '本人回复' : '嘴替'}}
+          </view>
+          <view class="bubble {{item.role === 'visitor' ? 'me' : 'other'}}">
+            {{item.content}}
+          </view>
+        </view>
+      </block>
+
+      <view wx:if="{{sending}}" class="msg-row left">
+        <view class="typing">
+          <view class="tdot"></view>
+          <view class="tdot"></view>
+          <view class="tdot"></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="composer">
+    <view wx:if="{{pending > 0 || justEscalated}}" class="pending">
+      {{persona ? '我还在确认上面那条,稍后回复你。' : '有 ' + (pending || 1) + ' 个问题已转给本人,回复后会出现在这里。'}}
+    </view>
+    <view wx:if="{{error && messages.length}}" class="error">{{error}}</view>
+
+    <view class="input-row">
+      <textarea
+        class="input"
+        value="{{input}}"
+        placeholder="{{placeholder}}"
+        auto-height
+        maxlength="2000"
+        cursor-spacing="24"
+        adjust-position
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="send"
+      />
+      <button
+        class="send {{input ? 'active' : ''}}"
+        bindtap="send"
+        disabled="{{sending || !input}}"
+      >
+        发送
+      </button>
+    </view>
+
+    <view class="foot">
+      <text class="home-link" bindtap="goHome">嘴替首页</text>
+      <text class="foot-dot">·</text>
+      <text>{{persona ? '仅双方可见' : '由嘴替生成'}}</text>
+    </view>
+  </view>
+</view>

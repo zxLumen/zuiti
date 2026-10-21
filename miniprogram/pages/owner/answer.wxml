@@ -1,0 +1,44 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="loading">正在加载…</view>
+
+  <view wx:elif="{{error && !escalation}}" class="error-card card">
+    <view class="error-title">打不开这个问题</view>
+    <view class="error-desc">{{error}}</view>
+  </view>
+
+  <block wx:else>
+    <view class="meta">
+      <text class="chip">{{escalation.capsuleTitle}}</text>
+      <text class="visitor">{{escalation.visitorLabel}}</text>
+    </view>
+
+    <view class="card question-card">
+      <view class="label">对方问</view>
+      <view class="question">{{escalation.question}}</view>
+      <view wx:if="{{escalation.reason}}" class="reason">超纲原因:{{escalation.reason}}</view>
+    </view>
+
+    <view wx:if="{{escalation.status === 'pending'}}" class="answer-wrap">
+      <view class="label">你的回答</view>
+      <textarea
+        class="answer-input"
+        value="{{answer}}"
+        placeholder="写下你的回答。回复后对方会立刻看到,而且会沉淀进这个嘴替。"
+        maxlength="5000"
+        auto-height
+        cursor-spacing="24"
+        bindinput="onInput"
+      />
+      <view wx:if="{{error}}" class="error">{{error}}</view>
+      <button class="btn-primary submit" bindtap="submit" disabled="{{sending}}">
+        {{sending ? '发送中…' : '回复并沉淀'}}
+      </button>
+      <view class="hint">回答会同时发送给对方,并让这个嘴替学会它。</view>
+    </view>
+
+    <view wx:else class="card answered">
+      <view class="label">已经回答过</view>
+      <view class="answered-text">{{escalation.answer || '—'}}</view>
+    </view>
+  </block>
+</view>

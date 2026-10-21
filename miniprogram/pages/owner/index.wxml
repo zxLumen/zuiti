@@ -1,0 +1,156 @@
+<view class="page">
+  <view class="head">
+    <view>
+      <view class="brand">嘴替</view>
+      <view class="brand-sub">主人入口</view>
+    </view>
+    <view class="head-actions">
+      <text class="home-link" bindtap="goHome">首页</text>
+      <view wx:if="{{loggedIn}}" class="logout" bindtap="logout">退出</view>
+    </view>
+  </view>
+
+  <view wx:if="{{!loggedIn}}" class="login-wrap">
+    <view class="card login-card">
+      <view class="login-title">主人登录</view>
+      <view class="login-desc">
+        用网页控制台同一个邮箱 + 密码登录。首次使用,请先在网页端用验证码登录,并在「设置」里设置密码。
+      </view>
+
+      <view class="field-label">邮箱</view>
+      <input
+        class="login-input"
+        type="text"
+        value="{{email}}"
+        placeholder="you@example.com"
+        bindinput="onEmailInput"
+        confirm-type="next"
+      />
+
+      <view class="field-label">密码</view>
+      <input
+        class="login-input"
+        password="{{true}}"
+        value="{{password}}"
+        placeholder="至少 8 位"
+        bindinput="onPasswordInput"
+        confirm-type="done"
+        bindconfirm="login"
+      />
+
+      <button class="btn-primary login-btn" bindtap="login" disabled="{{loading}}">
+        {{loading ? '登录中…' : '登录'}}
+      </button>
+
+      <view wx:if="{{error}}" class="error">{{error}}</view>
+
+      <view class="privacy-link" bindtap="openPrivacy">隐私说明</view>
+    </view>
+
+    <view class="login-hint">
+      好友不需要登录;他们从你转发的小程序卡片进入。
+    </view>
+  </view>
+
+  <block wx:else>
+    <view class="section-head">
+      <view class="section-title">我的嘴替</view>
+      <view class="section-sub">{{ownerEmail}}</view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading">正在加载…</view>
+
+    <view wx:elif="{{!capsules.length}}" class="empty card">
+      <view class="empty-title">还没有嘴替</view>
+      <view class="empty-desc">先去网页控制台创建一个,再回来分享。</view>
+    </view>
+
+    <view wx:else class="capsule-list">
+      <view class="card capsule" wx:for="{{capsules}}" wx:key="id">
+        <view class="capsule-top">
+          <view class="capsule-main">
+            <view class="capsule-title">{{item.title}}</view>
+            <view class="capsule-sub">{{item.subtitle || '还没有一句话说明'}}</view>
+          </view>
+          <view wx:if="{{item.pending > 0}}" class="pending-badge">
+            {{item.pending}} 待答
+          </view>
+        </view>
+
+        <view class="capsule-meta">
+          <text>{{item.threads}} 个对话</text>
+          <text class="dot">·</text>
+          <text>{{item.transparency === 'persona' ? '以你的名义' : item.transparency === 'assistant' ? '助理身份' : '透明 AI'}}</text>
+        </view>
+
+        <button
+          class="btn-primary share-btn"
+          open-type="share"
+          data-capsule="{{item.shareToken}}"
+          data-title="{{item.title}}"
+        >
+          转发给好友
+        </button>
+
+        <view wx:if="{{item.contacts.length}}" class="contact-share">
+          <view class="contact-share-title">
+            或转发给指定好友(对话会记录为这个备注)
+          </view>
+          <view class="contact-chips">
+            <button
+              wx:for="{{item.contacts}}"
+              wx:for-item="contact"
+              wx:key="id"
+              class="contact-chip"
+              open-type="share"
+              data-capsule="{{item.shareToken}}"
+              data-contact="{{contact.token}}"
+              data-title="{{item.title}}"
+            >
+              {{contact.name}}
+            </button>
+          </view>
+        </view>
+
+        <view class="file-manage" data-id="{{item.id}}" bindtap="goFiles">
+          <text>材料文件 · {{item.files}} 个</text>
+          <text class="file-manage-arrow">管理 →</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-head pending-head">
+      <view class="section-title">等你回答</view>
+      <view class="section-sub">{{escalations.length}} 个</view>
+    </view>
+
+    <view wx:if="{{!escalations.length}}" class="empty card">
+      <view class="empty-title">现在没有待答</view>
+      <view class="empty-desc">范围内的它自己答了;搞不定的会出现在这里。</view>
+    </view>
+
+    <view wx:else class="escalation-list">
+      <view
+        class="card escalation"
+        wx:for="{{escalations}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goAnswer"
+      >
+        <view class="escalation-meta">
+          <text class="chip">{{item.capsuleTitle}}</text>
+          <text class="visitor">{{item.visitorLabel}}</text>
+        </view>
+        <view class="escalation-q">{{item.question}}</view>
+        <view class="escalation-go">去回答 →</view>
+      </view>
+    </view>
+
+    <view wx:if="{{error}}" class="error">{{error}}</view>
+
+    <view class="footer">
+      好友点开卡片即可提问,无需登录
+      <text class="footer-link" bindtap="openPrivacy"> · 隐私说明</text>
+    </view>
+  </block>
+</view>

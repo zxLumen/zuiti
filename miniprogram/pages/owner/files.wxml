@@ -1,0 +1,121 @@
+<view class="page">
+  <view class="head">
+    <view>
+      <view class="brand">材料文件</view>
+      <view class="brand-sub">{{capsule.title || '正在加载…'}}</view>
+    </view>
+    <view class="back" bindtap="goBack">返回</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中…</view>
+
+  <block wx:else>
+    <view class="card section">
+      <view class="section-head">
+        <view class="section-copy">
+          <view class="section-title">项目文件</view>
+          <view class="section-hint">
+            每个文件单独保存,可随时增删。保存后会重新浓缩并重建索引。
+            提问时按相关性检索约 8000 字。
+            扫描件 OCR 通常需要几十秒,复杂文件可能更久,请勿关闭页面或重复点击。
+          </view>
+        </view>
+        <button
+          class="btn-ghost add-btn"
+          bindtap="onAddFiles"
+          disabled="{{uploading}}"
+        >
+          {{uploading ? '解析中…' : '添加文件'}}
+        </button>
+      </view>
+
+      <view wx:if="{{files.length}}" class="file-list">
+        <view class="file-row" wx:for="{{files}}" wx:key="id">
+          <view
+            class="file-main"
+            data-id="{{item.id}}"
+            data-name="{{item.name}}"
+            bindtap="previewExisting"
+          >
+            <view class="file-name">{{item.name}}</view>
+            <view class="file-meta">{{item.chars}} 字 · 点击预览</view>
+          </view>
+          <view
+            class="file-remove"
+            data-id="{{item.id}}"
+            catchtap="removeExisting"
+          >
+            移除
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{newFiles.length}}" class="file-list">
+        <view class="file-row new" wx:for="{{newFiles}}" wx:key="index">
+          <view
+            class="file-main"
+            data-index="{{index}}"
+            bindtap="previewNew"
+          >
+            <view class="file-name">
+              {{item.name}}
+              <text class="pending">待保存</text>
+            </view>
+            <view class="file-meta">{{item.chars}} 字 · 点击预览</view>
+          </view>
+          <view
+            class="file-remove"
+            data-index="{{index}}"
+            catchtap="removeNew"
+          >
+            移除
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{!files.length && !newFiles.length}}" class="empty">
+        还没有文件。点「添加文件」,可以选 PDF / DOCX / TXT / MD。
+      </view>
+
+      <view class="notes">
+        <view class="label">补充说明(可选)</view>
+        <textarea
+          class="textarea"
+          value="{{notes}}"
+          bindinput="onNotesInput"
+          maxlength="20000"
+          auto-height
+          placeholder="额外的背景、你的判断、不能承诺的事……"
+        />
+      </view>
+
+      <view class="total">
+        {{totalChars}} 字 · 上限 40 万字 · 提问时按相关性检索约 8000 字
+      </view>
+
+      <view wx:if="{{error}}" class="error">{{error}}</view>
+      <view wx:if="{{notice}}" class="notice">{{notice}}</view>
+
+      <button
+        class="btn-primary save"
+        bindtap="save"
+        disabled="{{saving || uploading}}"
+      >
+        {{saving ? '保存并浓缩…' : '保存并重新浓缩'}}
+      </button>
+    </view>
+  </block>
+
+  <view wx:if="{{preview.visible}}" class="modal-mask" bindtap="closePreview">
+    <view class="modal" catchtap="noop">
+      <view class="modal-head">
+        <text class="modal-title">{{preview.name}}</text>
+        <text class="modal-close" bindtap="closePreview">关闭</text>
+      </view>
+      <scroll-view scroll-y class="modal-body">
+        <view wx:if="{{preview.loading}}" class="loading">加载中…</view>
+        <text wx:else class="preview-text">{{preview.content || '没有可预览的文字。'}}</text>
+      </scroll-view>
+    </view>
+  </view>
+</view>

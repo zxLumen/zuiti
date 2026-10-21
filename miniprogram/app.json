@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/chat/chat",
+    "pages/owner/index",
+    "pages/owner/files",
+    "pages/owner/answer",
+    "pages/privacy/privacy"
+  ],
+  "networkTimeout": {
+    "request": 180000,
+    "uploadFile": 300000,
+    "downloadFile": 60000
+  },
+  "window": {
+    "navigationBarTitleText": "嘴替",
+    "navigationBarBackgroundColor": "#faf7f1",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f7f4ee",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

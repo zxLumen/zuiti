@@ -23,6 +23,10 @@
 # misc
 .DS_Store
 *.pem
+*.key
+
+# generated login preview QR codes
+/public/login/preview*.png
 
 # debug
 npm-debug.log*
@@ -31,7 +35,13 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.*
+!.env.example
+
+# local database
+/prisma/dev.db
+/prisma/dev.db-*
 
 # vercel
 .vercel
@@ -39,3 +49,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# devtools local config
+/miniprogram/project.private.config.json
+
+# 小程序上传密钥/本地密钥
+/.secrets/

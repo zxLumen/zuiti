@@ -1,0 +1,136 @@
+.page {
+  min-height: 100vh;
+  padding: 32rpx 28rpx calc(48rpx + env(safe-area-inset-bottom));
+  background: #f7f4ee;
+}
+
+.loading {
+  padding: 120rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #a8a29e;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4rpx 4rpx 20rpx;
+}
+
+.chip {
+  max-width: 62%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: #f5f5f4;
+  color: #57534e;
+  font-size: 21rpx;
+}
+
+.visitor {
+  font-size: 21rpx;
+  color: #a8a29e;
+}
+
+.question-card {
+  padding: 30rpx;
+}
+
+.label {
+  font-size: 21rpx;
+  font-weight: 600;
+  color: #a8a29e;
+  letter-spacing: 1rpx;
+}
+
+.question {
+  margin-top: 16rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #1c1917;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.reason {
+  margin-top: 20rpx;
+  padding: 12rpx 16rpx;
+  border-radius: 12rpx;
+  background: #fffbeb;
+  color: #92400e;
+  font-size: 21rpx;
+  line-height: 1.55;
+}
+
+.answer-wrap {
+  margin-top: 32rpx;
+}
+
+.answer-input {
+  margin-top: 14rpx;
+  width: 100%;
+  min-height: 240rpx;
+  padding: 22rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #d6d3d1;
+  background: #ffffff;
+  font-size: 27rpx;
+  line-height: 1.7;
+  color: #1c1917;
+}
+
+.submit {
+  margin-top: 24rpx;
+}
+
+.error {
+  margin-top: 16rpx;
+  padding: 14rpx 18rpx;
+  border-radius: 14rpx;
+  background: #fff1f2;
+  color: #be123c;
+  font-size: 23rpx;
+}
+
+.hint {
+  margin-top: 18rpx;
+  text-align: center;
+  font-size: 21rpx;
+  line-height: 1.6;
+  color: #a8a29e;
+}
+
+.error-card {
+  margin-top: 60rpx;
+  padding: 40rpx 30rpx;
+  text-align: center;
+}
+
+.error-title {
+  font-size: 29rpx;
+  font-weight: 600;
+  color: #1c1917;
+}
+
+.error-desc {
+  margin-top: 12rpx;
+  font-size: 23rpx;
+  color: #a8a29e;
+}
+
+.answered {
+  margin-top: 32rpx;
+  padding: 30rpx;
+}
+
+.answered-text {
+  margin-top: 14rpx;
+  font-size: 27rpx;
+  line-height: 1.7;
+  color: #292524;
+  white-space: pre-wrap;
+}

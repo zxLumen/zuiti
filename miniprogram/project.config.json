@@ -1,0 +1,34 @@
+{
+  "appid": "wx322b1ce49c5e982b",
+  "projectname": "zuiti",
+  "compileType": "miniprogram",
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "coverView": true,
+    "lazyloadPlaceholderEnable": false
+  },
+  "libVersion": "3.7.12",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "好友对话",
+          "pathName": "pages/chat/chat",
+          "query": "capsule=",
+          "scene": null
+        },
+        {
+          "name": "主人入口",
+          "pathName": "pages/owner/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

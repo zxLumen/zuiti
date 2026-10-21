@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 原生小程序代码,不是 Next.js/TS 工程
+    "miniprogram/**",
   ]),
 ]);
 

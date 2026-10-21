@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="title">隐私说明</view>
+  <view class="updated">更新日期:2026 年 10 月 21 日</view>
+
+  <view class="section">
+    <view class="h">我们会处理哪些信息</view>
+    <view class="p">1. 微信 OpenID:用于区分不同的对话,不会对外展示。</view>
+    <view class="p">2. 你在小程序内主动发送的问题,以及嘴替生成的回答。</view>
+    <view class="p">3. 主人上传的材料,仅用于生成回答,不会向对话方展示原文。</view>
+  </view>
+
+  <view class="section">
+    <view class="h">不会做什么</view>
+    <view class="p">本小程序不会读取你的微信聊天记录,不会登录或操作你的微信账号,也不会向你未主动打开小程序的微信好友发送消息。</view>
+  </view>
+
+  <view class="section">
+    <view class="h">信息如何使用</view>
+    <view class="p">问题会用于生成回答;超出材料范围的问题会转交给主人本人确认。主人亲自回答后,答案会用于让这个嘴替在后续回答同类问题。</view>
+  </view>
+
+  <view class="section">
+    <view class="h">存储与删除</view>
+    <view class="p">对话会保存在服务端,用于保持上下文连续。你可以联系主人删除相关对话或材料。</view>
+  </view>
+
+  <view class="section">
+    <view class="h">重要提示</view>
+    <view class="p">回答由大模型基于主人提供的材料生成,可能不完整或不准确。涉及承诺、金额、时间、合同等重要事项,请向本人确认。</view>
+  </view>
+
+  <view class="section">
+    <view class="h">联系方式</view>
+    <view class="p">zuiti@zxlumen.cn</view>
+  </view>
+</view>

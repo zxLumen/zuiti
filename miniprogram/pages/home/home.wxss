@@ -1,0 +1,77 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 48rpx calc(80rpx + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 20% 10%, rgba(253, 230, 138, 0.7), transparent 55%),
+    radial-gradient(circle at 85% 90%, rgba(254, 205, 211, 0.55), transparent 55%),
+    #faf7f1;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mark {
+  width: 152rpx;
+  height: 152rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fcd34d, #f97316 55%, #f43f5e);
+  color: #431407;
+  font-size: 68rpx;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 24rpx 50rpx rgba(180, 83, 9, 0.2);
+}
+
+.name {
+  margin-top: 32rpx;
+  font-size: 56rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+  color: #1c1917;
+}
+
+.tag {
+  margin-top: 14rpx;
+  font-size: 28rpx;
+  color: #57534e;
+}
+
+.desc {
+  margin-top: 18rpx;
+  max-width: 520rpx;
+  font-size: 23rpx;
+  line-height: 1.75;
+  color: #a8a29e;
+}
+
+.actions {
+  margin-top: 64rpx;
+  width: 100%;
+  max-width: 520rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.actions .btn-primary,
+.actions .btn-ghost {
+  width: 100%;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+}
+
+.foot {
+  margin-top: 72rpx;
+  font-size: 20rpx;
+  color: #a8a29e;
+}
